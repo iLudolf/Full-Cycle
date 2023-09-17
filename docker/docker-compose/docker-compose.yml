@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+  app: 
+    build: .
+    restart: always
+    container_name: app
+    networks:
+      - full-cyle
+    depends_on:
+      - db  
+      - web
+
+  db:
+    image: mysql
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    networks:
+      - full-cyle
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: fullcycle
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  web:
+    build: ./nginx
+    restart: always
+    container_name: nginx
+    ports:
+    -  80:80
+    networks:
+      - full-cyle
+
+networks:
+  full-cyle:
+    driver: bridge
+
