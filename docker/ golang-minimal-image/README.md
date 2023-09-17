@@ -5,7 +5,7 @@
 Esse desafio é muito empolgante principalmente se você nunca trabalhou com a linguagem Go!
 Você terá que publicar uma imagem no docker hub. Quando executarmos:
 
-    -  docker run <seu-user>/codeeducation
+    -  docker run iludolf/golang-minimal-image
 
 Temos que ter o seguinte resultado: `Full Cycle Rocks!!`
 
@@ -50,21 +50,13 @@ WORKDIR /
 COPY --from=builder /src / 
 
 # executando 
-CMD ["./main"]
-```
-
-## Inserindo alguns parâmetros para o linker via -ldflags
-
-- Parâmetros para o linker que vão ajudar a diminuir o tamanho do executável final  ( -ldflags '-s -w' )
-
-```
-O parâmetro -s remove informações de debug do executável e o -w impede a geração do DWARF (Debugging With Attributed Record Formats).
+CMD ["./app"]
 ```
 
 ## Build 
 
 ```
-docker build -t leoviana00/codeeducation . -f Dockerfile.scratch
+docker build -t iludolf/golang-minimal-image . -f Dockerfile.scratch
 ```
 
 ## Images
@@ -76,7 +68,7 @@ docker images
 ## Run
 
 ```
-docker run leoviana00/codeeducation
+docker run iludolf/golang-minimal-image
 ```
 ![](image/go-scratch.png)
 
@@ -88,12 +80,12 @@ docker login
 ## Push
 
 ```
-docker pull leoviana00/codeeducation
+docker pull iludolf/golang-minimal-image
 ```
 ## Pull
 
 ```
-docker pull leoviana00/codeeducation
+docker pull iludolf/golang-minimal-image
 ```
 
 ## Referências
